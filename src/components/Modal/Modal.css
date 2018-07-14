@@ -1,0 +1,23 @@
+.Modal {
+  display: block;
+}
+
+.Overlay {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+}
+
+.Content {
+  margin: auto;
+  background: white;
+  width: 500px;
+  padding: 20px;
+  top: 40px;
+  position: relative;
+}
+
+.Hiden {
+  display: none;
+}

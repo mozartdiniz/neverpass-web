@@ -7,6 +7,7 @@ import { Button } from './components/Button/Button';
 import { MainContent } from './components/MainContent/MainContent';
 
 import * as styles from './App.css';
+import { Modal } from './components/Modal/Modal';
 
 const password = generator.generate({
   length: 20,
@@ -19,6 +20,7 @@ class App extends React.Component {
   public render() {
     return (
       <div className={styles.App}>
+        <Modal show={false}>something!</Modal>
         <SideMenu />
         <MainContent>
           <TopBar>
