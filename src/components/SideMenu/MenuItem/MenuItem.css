@@ -1,0 +1,7 @@
+.MenuItem {
+  align-items: center;
+  color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  background-color: rgb(255, 200, 200);
+}

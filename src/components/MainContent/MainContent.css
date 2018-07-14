@@ -1,7 +1,10 @@
 .MainContent {
-  align-items: top;
   display: flex;
   justify-content: left;
   background-color: rgb(255, 153, 51);
   flex-grow: 1;
+  flex: 1 1 0%;
+  flex-flow: column nowrap;
+  place-content: stretch flex-start;
+  align-items: stretch;
 }
