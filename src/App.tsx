@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as generator from 'generate-password';
+import { connect } from 'react-redux';
 import SideMenu from './components/SideMenu/SideMenu';
 import PasswordList from './components/PasswordList/PasswordList';
 import { TopBar } from './components/TopBar/TopBar';
@@ -34,4 +35,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect()(App);
