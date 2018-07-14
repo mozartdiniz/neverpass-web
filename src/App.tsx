@@ -6,10 +6,12 @@ import { TopBar } from './components/TopBar/TopBar';
 import { Button } from './components/Button/Button';
 import { MainContent } from './components/MainContent/MainContent';
 
+import * as styles from './App.css';
+
 class App extends React.Component {
   public render() {
     return (
-      <div>
+      <div className={styles.App}>
         <SideMenu />
         <MainContent>
           <TopBar>

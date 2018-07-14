@@ -1,0 +1,7 @@
+.MainContent {
+  align-items: top;
+  display: flex;
+  justify-content: left;
+  background-color: rgb(255, 153, 51);
+  flex-grow: 1;
+}

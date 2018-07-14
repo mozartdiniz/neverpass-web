@@ -1,0 +1,6 @@
+.SideMenu {
+  width: 250px;
+  align-items: top;
+  display: flex;
+  justify-content: left;
+}
