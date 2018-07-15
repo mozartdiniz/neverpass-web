@@ -1,11 +1,13 @@
 import * as React from 'react';
 import * as uiActions from '../../store/ui/ui.actions';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { TopBar } from '../../components/TopBar/TopBar';
 import { Button } from '../../components/Button/Button';
 import { PasswordList } from '../../components/PasswordList/PasswordList';
 import { Modal } from '../../components/Modal/Modal';
+import { IAppState } from '../../store/interfaces';
 
 export interface IPasswordsProps {
   showNewPasswordModal: boolean;
@@ -33,11 +35,15 @@ class Passwords extends React.Component<IPasswordsProps> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+type DispatchProperties = 'newPassword' | 'cancelNewPassword';
+
+const mapStateToProps = (state: IAppState) => ({
   showNewPasswordModal: state.ui.showNewPasswordModal
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (
+  dispatch: Dispatch
+): Pick<IPasswordsProps, DispatchProperties> => ({
   newPassword: () => dispatch(uiActions.newPassword()),
   cancelNewPassword: () => dispatch(uiActions.cancelNewPassword())
 });

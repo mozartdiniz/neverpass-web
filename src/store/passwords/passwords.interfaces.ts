@@ -1,3 +1,5 @@
+import * as actionTypes from '../actionTypes';
+
 export interface IPasswordState {
   selectedPassword: IPassword | null;
   passwords: IPassword[];
@@ -12,4 +14,19 @@ export interface IPassword {
   value: string;
   name: string;
   alwaysLogMe: boolean;
+}
+
+export interface IEditPasswordAction {
+  type: typeof actionTypes.EDIT_PASSWORD;
+  id: string;
+}
+
+export interface IUpdatePasswordAction {
+  type: typeof actionTypes.UPDATE_PASSWORD;
+  password: IPassword;
+}
+
+export interface ISaveNewPasswordAction {
+  type: typeof actionTypes.SAVE_NEW_PASSWORD;
+  password: IPassword;
 }
