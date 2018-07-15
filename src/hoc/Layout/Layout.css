@@ -1,0 +1,11 @@
+.Layout {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+  height: 100vh;
+  overflow: hidden;
+}
