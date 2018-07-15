@@ -18,7 +18,12 @@ class Passwords extends React.Component<IPasswordsProps> {
   public render() {
     return (
       <>
-        <Modal show={this.props.showNewPasswordModal}>something!</Modal>
+        <Modal show={this.props.showNewPasswordModal}>
+          <Button
+            text={'Cancel'}
+            onClickHandler={this.props.cancelNewPassword}
+          />
+        </Modal>
         <TopBar>
           <Button text={'Add New'} onClickHandler={this.props.newPassword} />
         </TopBar>
