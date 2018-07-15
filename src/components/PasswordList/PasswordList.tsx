@@ -3,11 +3,16 @@ import * as React from 'react';
 import { PasswordListItem } from './PasswordListItem/PasswordListItem';
 
 import * as styles from './PasswordList.css';
+import { IPassword } from '../../store/passwords/passwords.interfaces';
 
-export const PasswordList = () => (
+export interface IPasswordListProps {
+  passwords: IPassword[];
+}
+
+export const PasswordList = (props: IPasswordListProps) => (
   <div className={styles.PasswordList}>
-    <PasswordListItem name={'Apple Id'} login={'mozart.diniz@gmail.com'} />
-    <PasswordListItem name={'Booking.com'} login={'mozart.diniz@gmail.com'} />
-    <PasswordListItem name={'Duolingo.com'} login={'mozart.diniz@gmail.com'} />
+    {props.passwords.map(password => (
+      <PasswordListItem name={password.name} login={password.login} />
+    ))}
   </div>
 );

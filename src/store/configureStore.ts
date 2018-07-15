@@ -3,9 +3,11 @@ import thunk from 'redux-thunk';
 
 // Reducers
 import ui from './ui/ui.reducers';
+import password from './passwords/passwords.reducers';
 
 const rootReducer = combineReducers({
-  ui
+  ui,
+  password
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

@@ -6,7 +6,8 @@ import {
 import {
   IEditPasswordAction,
   IUpdatePasswordAction,
-  ISaveNewPasswordAction
+  ISaveNewPasswordAction,
+  IPasswordState
 } from './passwords/passwords.interfaces';
 
 export type AppAction =
@@ -18,4 +19,5 @@ export type AppAction =
 
 export interface IAppState {
   ui: IUIState;
+  password: IPasswordState;
 }

@@ -8,9 +8,11 @@ import { Button } from '../../components/Button/Button';
 import { PasswordList } from '../../components/PasswordList/PasswordList';
 import { Modal } from '../../components/Modal/Modal';
 import { IAppState } from '../../store/interfaces';
+import { IPassword } from '../../store/passwords/passwords.interfaces';
 
 export interface IPasswordsProps {
   showNewPasswordModal: boolean;
+  passwords: IPassword[];
 
   newPassword: () => void;
   cancelNewPassword: () => void;
@@ -29,7 +31,7 @@ class Passwords extends React.Component<IPasswordsProps> {
         <TopBar>
           <Button text={'Add New'} onClickHandler={this.props.newPassword} />
         </TopBar>
-        <PasswordList />
+        <PasswordList passwords={this.props.passwords} />
       </>
     );
   }
@@ -38,7 +40,8 @@ class Passwords extends React.Component<IPasswordsProps> {
 type DispatchProperties = 'newPassword' | 'cancelNewPassword';
 
 const mapStateToProps = (state: IAppState) => ({
-  showNewPasswordModal: state.ui.showNewPasswordModal
+  showNewPasswordModal: state.ui.showNewPasswordModal,
+  passwords: state.password.passwords
 });
 
 const mapDispatchToProps = (
