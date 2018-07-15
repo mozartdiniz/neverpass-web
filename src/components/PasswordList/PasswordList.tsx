@@ -12,7 +12,11 @@ export interface IPasswordListProps {
 export const PasswordList = (props: IPasswordListProps) => (
   <div className={styles.PasswordList}>
     {props.passwords.map(password => (
-      <PasswordListItem name={password.name} login={password.login} />
+      <PasswordListItem
+        name={password.name}
+        login={password.login}
+        key={password.id}
+      />
     ))}
   </div>
 );

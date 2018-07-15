@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as uiActions from '../../store/ui/ui.actions';
+import * as passwordActions from '../../store/passwords/passwords.actions';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
@@ -9,12 +10,14 @@ import { PasswordList } from '../../components/PasswordList/PasswordList';
 import { Modal } from '../../components/Modal/Modal';
 import { IAppState } from '../../store/interfaces';
 import { IPassword } from '../../store/passwords/passwords.interfaces';
+import PasswordForm from '../PasswordForm/PasswordForm';
 
 export interface IPasswordsProps {
   showNewPasswordModal: boolean;
   passwords: IPassword[];
 
   newPassword: () => void;
+  savePassword: (password: IPassword) => void;
   cancelNewPassword: () => void;
 }
 
@@ -23,9 +26,9 @@ class Passwords extends React.Component<IPasswordsProps> {
     return (
       <>
         <Modal show={this.props.showNewPasswordModal}>
-          <Button
-            text={'Cancel'}
-            onClickHandler={this.props.cancelNewPassword}
+          <PasswordForm
+            onCloseForm={this.props.cancelNewPassword}
+            onSaveForm={this.props.savePassword}
           />
         </Modal>
         <TopBar>
@@ -37,7 +40,7 @@ class Passwords extends React.Component<IPasswordsProps> {
   }
 }
 
-type DispatchProperties = 'newPassword' | 'cancelNewPassword';
+type DispatchProperties = 'newPassword' | 'cancelNewPassword' | 'savePassword';
 
 const mapStateToProps = (state: IAppState) => ({
   showNewPasswordModal: state.ui.showNewPasswordModal,
@@ -48,6 +51,8 @@ const mapDispatchToProps = (
   dispatch: Dispatch
 ): Pick<IPasswordsProps, DispatchProperties> => ({
   newPassword: () => dispatch(uiActions.newPassword()),
+  savePassword: (password: IPassword) =>
+    dispatch(passwordActions.saveNewPassword(password)),
   cancelNewPassword: () => dispatch(uiActions.cancelNewPassword())
 });
 

@@ -19,14 +19,24 @@ const editPassword = (state: IPasswordState, action: IEditPasswordAction) => ({
 const saveNewPassword = (
   state: IPasswordState,
   action: ISaveNewPasswordAction
-) => ({
-  ...state,
-  passwords: state.passwords.concat([
-    {
-      ...action.password
-    }
-  ])
-});
+) => {
+  console.log({
+    ...state,
+    passwords: state.passwords.concat([
+      {
+        ...action.password
+      }
+    ])
+  });
+  return {
+    ...state,
+    passwords: state.passwords.concat([
+      {
+        ...action.password
+      }
+    ])
+  };
+};
 
 const reducer = (state = initialState, action: AppAction) => {
   switch (action.type) {
