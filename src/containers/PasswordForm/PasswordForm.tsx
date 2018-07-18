@@ -2,10 +2,8 @@ import * as React from 'react';
 import { IPassword } from '../../store/passwords/passwords.interfaces';
 import { Button } from '../../components/Button/Button';
 import { v4 as uuid } from 'uuid';
-
-export type IReactFormEvents =
-  | React.FormEvent<HTMLInputElement>
-  | React.FormEvent<HTMLTextAreaElement>;
+import { IReactFormEvents } from './PasswordForm.types';
+import GeneratePassword from '../GeneratePassword/GeneratePassword';
 
 export interface IPasswordFormProps {
   selectedPassword?: IPassword;
@@ -44,6 +42,15 @@ class PasswordForm extends React.Component<
       password: {
         ...this.state.password,
         [key]: e.currentTarget.value
+      }
+    });
+  };
+
+  public getGeneratedPassword = (password: string) => {
+    this.setState({
+      password: {
+        ...this.state.password,
+        value: password
       }
     });
   };
@@ -104,6 +111,8 @@ class PasswordForm extends React.Component<
               value={this.state.password.value}
               onChange={e => this.changeValue(e, 'value')}
             />
+            <button>Generate</button>
+            <GeneratePassword onGeneratePassword={this.getGeneratedPassword} />
           </div>
         </div>
         <div>
