@@ -14,6 +14,7 @@ export interface IPasswordFormProps {
 
 export interface IPasswordFormState {
   password: IPassword;
+  showGeneratePasswordDialog: boolean;
 }
 
 const defaultState: IPassword = {
@@ -34,7 +35,8 @@ class PasswordForm extends React.Component<
   public state = {
     password: {
       ...defaultState
-    }
+    },
+    showGeneratePasswordDialog: false
   };
 
   public changeValue = (e: IReactFormEvents, key: keyof IPassword) => {
@@ -70,7 +72,21 @@ class PasswordForm extends React.Component<
     });
   };
 
+  public toggleGeneratePasswordDialog = () => {
+    this.setState({
+      ...this.state,
+      showGeneratePasswordDialog: !this.state.showGeneratePasswordDialog
+    });
+  };
+
   public render() {
+    const generatePasswordDialog = this.state.showGeneratePasswordDialog ? (
+      <div>
+        <GeneratePassword onGeneratePassword={this.getGeneratedPassword} />
+      </div>
+    ) : (
+      false
+    );
     return (
       <div>
         <div>
@@ -111,8 +127,10 @@ class PasswordForm extends React.Component<
               value={this.state.password.value}
               onChange={e => this.changeValue(e, 'value')}
             />
-            <button>Generate</button>
-            <GeneratePassword onGeneratePassword={this.getGeneratedPassword} />
+            <button onClick={this.toggleGeneratePasswordDialog}>
+              Generate
+            </button>
+            {generatePasswordDialog}
           </div>
         </div>
         <div>
