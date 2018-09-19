@@ -21,20 +21,58 @@ export interface IPasswordsProps {
   cancelNewPassword: () => void;
 }
 
+export interface IPasswordsState {
+  selectedPasswordId: string | undefined;
+}
+
 class Passwords extends React.Component<IPasswordsProps> {
+  public state: IPasswordsState = {
+    selectedPasswordId: undefined
+  };
+
+  public setSelectedPassword = (selectedPasswordId: string) => {
+    this.setState({
+      selectedPasswordId
+    });
+
+    this.props.newPassword();
+  };
+
+  public unselectPassword = () => {
+    this.setState({
+      selectedPasswordId: undefined
+    });
+  };
+
+  public onCloseModal = () => {
+    this.unselectPassword();
+    this.props.cancelNewPassword();
+  };
+
   public render() {
+    console.log(this.state.selectedPasswordId);
+    const selectedPassword = this.state.selectedPasswordId
+      ? this.props.passwords.find(
+          password => password.id === this.state.selectedPasswordId
+        )
+      : undefined;
+
     return (
       <>
         <Modal show={this.props.showNewPasswordModal}>
           <PasswordForm
-            onCloseForm={this.props.cancelNewPassword}
+            selectedPassword={selectedPassword}
+            onCloseForm={this.onCloseModal}
             onSaveForm={this.props.savePassword}
           />
         </Modal>
         <TopBar>
           <Button text={'Add New'} onClickHandler={this.props.newPassword} />
         </TopBar>
-        <PasswordList passwords={this.props.passwords} />
+        <PasswordList
+          passwords={this.props.passwords}
+          onSelectPassword={this.setSelectedPassword}
+        />
       </>
     );
   }

@@ -7,14 +7,16 @@ import { IPassword } from '../../store/passwords/passwords.interfaces';
 
 export interface IPasswordListProps {
   passwords: IPassword[];
+
+  onSelectPassword: (passwordId: string) => void;
 }
 
 export const PasswordList = (props: IPasswordListProps) => (
   <div className={styles.PasswordList}>
     {props.passwords.map(password => (
       <PasswordListItem
-        name={password.name}
-        login={password.login}
+        onSelectPassword={props.onSelectPassword}
+        password={password}
         key={password.id}
       />
     ))}

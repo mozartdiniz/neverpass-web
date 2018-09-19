@@ -6,7 +6,7 @@ import { IReactFormEvents } from './PasswordForm.types';
 import GeneratePassword from '../GeneratePassword/GeneratePassword';
 
 export interface IPasswordFormProps {
-  selectedPassword?: IPassword;
+  selectedPassword: IPassword | undefined;
 
   onCloseForm: () => void;
   onSaveForm: (password: IPassword) => void;
@@ -77,6 +77,32 @@ class PasswordForm extends React.Component<
       ...this.state,
       showGeneratePasswordDialog: !this.state.showGeneratePasswordDialog
     });
+  };
+
+  public componentDidUpdate(prevProps: IPasswordFormProps) {
+    if (!this.props.selectedPassword) {
+      return;
+    }
+
+    if (
+      this.props.selectedPassword &&
+      prevProps.selectedPassword &&
+      this.props.selectedPassword.id === prevProps.selectedPassword.id
+    ) {
+      return;
+    }
+
+    this.setState({
+      password: this.props.selectedPassword
+    });
+  }
+
+  public closeForm = () => {
+    this.setState({
+      password: defaultState
+    });
+
+    this.props.onCloseForm();
   };
 
   public render() {
@@ -153,7 +179,7 @@ class PasswordForm extends React.Component<
           </div>
         </div>
         <div>
-          <Button text={'Cancel'} onClickHandler={this.props.onCloseForm} />
+          <Button text={'Cancel'} onClickHandler={this.closeForm} />
           <Button text={'Save'} onClickHandler={this.addNewPassword} />
         </div>
       </div>
