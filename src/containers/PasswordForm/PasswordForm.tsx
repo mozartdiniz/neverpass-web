@@ -20,7 +20,6 @@ export interface IPasswordFormState {
 const defaultState: IPassword = {
   id: '',
   website: '',
-  email: '',
   note: '',
   login: '',
   value: '',
@@ -128,16 +127,6 @@ class PasswordForm extends React.Component<
           </div>
         </div>
         <div>
-          <div>Email</div>
-          <div>
-            <input
-              type="email"
-              value={this.state.password.email}
-              onChange={e => this.changeValue(e, 'email')}
-            />
-          </div>
-        </div>
-        <div>
           <div>Login</div>
           <div>
             <input
@@ -152,6 +141,7 @@ class PasswordForm extends React.Component<
           <div>
             <input
               type="password"
+              autoComplete="new-password"
               value={this.state.password.value}
               onChange={e => this.changeValue(e, 'value')}
             />
