@@ -7,7 +7,8 @@ import {
   IEditPasswordAction,
   IUpdatePasswordAction,
   ISaveNewPasswordAction,
-  IPasswordState
+  IPasswordState,
+  IGetPasswords
 } from './passwords/passwords.interfaces';
 
 export type AppAction =
@@ -15,6 +16,7 @@ export type AppAction =
   | ICancelNewPasswordAction
   | IEditPasswordAction
   | IUpdatePasswordAction
+  | IGetPasswords
   | ISaveNewPasswordAction;
 
 export interface IAppState {

@@ -16,6 +16,16 @@ export interface IPassword {
   alwaysLogMe: boolean;
 }
 
+export interface IGetPasswords {
+  type: typeof actionTypes.GET_PASSWORDS;
+  passwords: IPassword[];
+}
+
+export interface ILoadPasswordsFromFirebaseAction {
+  type: typeof actionTypes.LOAD_PASSWORDS_FROM_FIREBASE;
+  passwords: IPassword[];
+}
+
 export interface IEditPasswordAction {
   type: typeof actionTypes.EDIT_PASSWORD;
   id: string;

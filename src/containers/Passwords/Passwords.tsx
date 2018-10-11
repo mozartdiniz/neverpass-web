@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as uiActions from '../../store/ui/ui.actions';
 import * as passwordActions from '../../store/passwords/passwords.actions';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import { TopBar } from '../../components/TopBar/TopBar';
 import { Button } from '../../components/Button/Button';
@@ -17,6 +16,7 @@ export interface IPasswordsProps {
   passwords: IPassword[];
 
   newPassword: () => void;
+  getPasswords: () => void;
   savePassword: (password: IPassword) => void;
   cancelNewPassword: () => void;
 }
@@ -49,8 +49,11 @@ class Passwords extends React.Component<IPasswordsProps> {
     this.props.cancelNewPassword();
   };
 
+  public componentDidMount() {
+    this.props.getPasswords();
+  }
+
   public render() {
-    console.log(this.state.selectedPasswordId);
     const selectedPassword = this.state.selectedPasswordId
       ? this.props.passwords.find(
           password => password.id === this.state.selectedPasswordId
@@ -78,7 +81,11 @@ class Passwords extends React.Component<IPasswordsProps> {
   }
 }
 
-type DispatchProperties = 'newPassword' | 'cancelNewPassword' | 'savePassword';
+type DispatchProperties =
+  | 'newPassword'
+  | 'cancelNewPassword'
+  | 'savePassword'
+  | 'getPasswords';
 
 const mapStateToProps = (state: IAppState) => ({
   showNewPasswordModal: state.ui.showNewPasswordModal,
@@ -86,11 +93,12 @@ const mapStateToProps = (state: IAppState) => ({
 });
 
 const mapDispatchToProps = (
-  dispatch: Dispatch
+  dispatch: any
 ): Pick<IPasswordsProps, DispatchProperties> => ({
+  getPasswords: () => dispatch(passwordActions.getPasswordsFromFirebase()),
   newPassword: () => dispatch(uiActions.newPassword()),
   savePassword: (password: IPassword) =>
-    dispatch(passwordActions.saveNewPassword(password)),
+    dispatch(passwordActions.savePasswordToFirebase(password)),
   cancelNewPassword: () => dispatch(uiActions.cancelNewPassword())
 });
 
