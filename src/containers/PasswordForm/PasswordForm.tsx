@@ -58,9 +58,11 @@ class PasswordForm extends React.Component<
   };
 
   public addNewPassword = () => {
+    const { id } = this.state.password;
+
     const statePassword = {
       ...this.state.password,
-      id: uuid()
+      id: id ? id : uuid()
     };
 
     this.props.onSaveForm(statePassword);

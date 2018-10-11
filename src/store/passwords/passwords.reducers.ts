@@ -3,7 +3,8 @@ import {
   IPasswordState,
   IEditPasswordAction,
   ISaveNewPasswordAction,
-  IGetPasswords
+  IGetPasswords,
+  IPassword
 } from './passwords.interfaces';
 import { AppAction } from '../interfaces';
 
@@ -26,14 +27,20 @@ const saveNewPassword = (
   state: IPasswordState,
   action: ISaveNewPasswordAction
 ) => {
-  console.log({
-    ...state,
-    passwords: state.passwords.concat([
-      {
-        ...action.password
-      }
-    ])
-  });
+  if (
+    state.passwords.find(
+      (password: IPassword) => password.id === action.password.id
+    )
+  ) {
+    return {
+      ...state,
+      passwords: state.passwords.map(
+        (password: IPassword) =>
+          password.id === action.password.id ? action.password : password
+      )
+    };
+  }
+
   return {
     ...state,
     passwords: state.passwords.concat([

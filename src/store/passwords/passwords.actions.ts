@@ -35,17 +35,17 @@ export const updatePassword = (password: IPassword): IUpdatePasswordAction => ({
   password
 });
 
-export const savePasswordToFirebase = (password: IPassword) => (
-  dispatch: any
-) =>
-  database
-    .ref(`/passwords`)
-    .push(password)
-    .then(() => dispatch(saveNewPassword(password)));
-
 export const saveNewPassword = (
   password: IPassword
 ): ISaveNewPasswordAction => ({
   type: actionTypes.SAVE_NEW_PASSWORD,
   password
 });
+
+export const savePasswordToFirebase = (password: IPassword) => (
+  dispatch: any
+) =>
+  database
+    .ref(`/passwords/${password.id}`)
+    .set(password)
+    .then(() => dispatch(saveNewPassword(password)));
