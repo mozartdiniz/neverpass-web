@@ -1,7 +1,7 @@
 .MainContent {
   display: flex;
   justify-content: left;
-  background-color: rgb(255, 153, 51);
+  background-color: #ddf3e6;
   flex-grow: 1;
   flex: 1 1 0%;
   flex-flow: column nowrap;

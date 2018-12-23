@@ -13,12 +13,14 @@ export interface IPasswordListProps {
 
 export const PasswordList = (props: IPasswordListProps) => (
   <div className={styles.PasswordList}>
-    {props.passwords.map(password => (
-      <PasswordListItem
-        onSelectPassword={props.onSelectPassword}
-        password={password}
-        key={password.id}
-      />
-    ))}
+    <div className={styles.SpacingArea}>
+      {props.passwords.map(password => (
+        <PasswordListItem
+          onSelectPassword={props.onSelectPassword}
+          password={password}
+          key={password.id}
+        />
+      ))}
+    </div>
   </div>
 );

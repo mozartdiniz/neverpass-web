@@ -11,6 +11,8 @@ import { IAppState } from '../../store/interfaces';
 import { IPassword } from '../../store/passwords/passwords.interfaces';
 import PasswordForm from '../PasswordForm/PasswordForm';
 
+import * as styles from './Passwords.css';
+
 export interface IPasswordsProps {
   showNewPasswordModal: boolean;
   passwords: IPassword[];
@@ -70,7 +72,11 @@ class Passwords extends React.Component<IPasswordsProps> {
           />
         </Modal>
         <TopBar>
-          <Button text={'Add New'} onClickHandler={this.props.newPassword} />
+          <Button
+            text={'Add New'}
+            onClickHandler={this.props.newPassword}
+            className={styles.NewPasswordButton}
+          />
         </TopBar>
         <PasswordList
           passwords={this.props.passwords}
